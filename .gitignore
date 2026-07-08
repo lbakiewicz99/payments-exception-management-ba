@@ -1,0 +1,19 @@
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+#Python / local environments
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Environment files
+.env
+*.local
+
+# Temporary files
+*.tmp
+*.bak
