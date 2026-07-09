@@ -60,7 +60,7 @@ As a Payments Operations Team Lead, I want to assign an owner to a payment excep
 
 ### Acceptance criteria
 
-```gharkin
+```gherkin
 Given a payment exception case exists
 When I assign an owner
 Then the selected owner should be saved on the case
