@@ -61,12 +61,12 @@ The exception queue should allow users to:
 
 | KPI           | Definition                                                               | Related requirement |
 |---------------|--------------------------------------------------------------------------|---------------------|
-| Open cases    | Count of cases where status is not ```text Closed```                     | RR-001              |
+| Open cases    | Count of cases where status is not ```Closed```                          | RR-001              |
 | SLA Breaches  | Count of open cases where SLA breach flag = Yes                          | RR-004              |
 | Aged Cases    | Count of open cases older than 5 business days                           | RR-003              |
 | High/Critical | Count of open High or Critical priority cases                            | CR-003              |
 | Unassigned    | Count of open cases without owner or team queue                          | FR-017, CR-006      |
-| Escalated     | Count of cases with status ```text Escalated``` or escalation flag = Yes | FR-018              |
+| Escalated     | Count of cases with status ```Escalated``` or escalation flag = Yes      | FR-018              |
 
 ## 6. Queue columns
 
@@ -134,11 +134,11 @@ Users should also be able to sort by:
 |-------------------|--------------------------------------|
 | Critical priority | Strong warning label                 |
 | High priority     | High-priority label                  |
-| SLA breach        | ```text Breached``` status indicator |
-| SLA due today     | ```text DUE TODAY``` indicator       |
+| SLA breach        | ```Breached``` status indicator      |
+| SLA due today     | ```DUE TODAY``` indicator            |
 | Aged case         | Aging badge showing days open        |
 | Escalated case    | Escalation badge                     |
-| Unassigned case   | ```text UNASSIGNED``` warning        |
+| Unassigned case   | ```UNASSIGNED``` warning             |
 | Customer impact   | Customer impact icon label           |
 | High-value case   | High-value flag                      |
 | Duplicate risk    | Duplicate-risk warning               |
@@ -182,7 +182,7 @@ Selecting a queue row should open the Exception Detail view:
 
 | Scenario                           | Expected behavior                                                             |
 |------------------------------------|-------------------------------------------------------------------------------|
-| No cases match filters             | Display message: ```text No payment exceptions match the selected filters.``` |
+| No cases match filters             | Display message: ```No payment exceptions match the selected filters.```      |
 | No open exceptions exist           | Display zero-value KPI cards and empty queue message                          |
 | Reporting data unavailable         | Display clear data availability warning                                       |
 | Export fails                       | Display error message without losing selected filters                         |
