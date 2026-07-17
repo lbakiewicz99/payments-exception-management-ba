@@ -18,6 +18,12 @@ UAT_TEST_CASES_FILE_PATH = (
     / "uat_test_cases.csv"
 )
 
+TRACEABILITY_FILE_PATH = (
+    PROJECT_ROOT
+    / "output_examples"
+    / "requirements_traceability_matrix.csv"
+)
+
 RISK_CONTROLS_REQUIRED_COLUMNS = {
     "risk_id",
     "risk_description",
@@ -53,6 +59,19 @@ UAT_REQUIRED_COLUMNS = {
     "retest_status",
 }
 
+TRACEABILITY_REQUIRED_COLUMNS = {
+    "trace_id",
+    "business_objective",
+    "business_requirement",
+    "solution_requirement",
+    "user_story",
+    "business_rule",
+    "risk_id",
+    "control_id",
+    "uat_test_case",
+    "coverage_status",
+}
+
 VALID_RISK_RATING = {
     "Low",
     "Medium",
@@ -85,6 +104,12 @@ VALID_RETEST_STATUSES = {
     "Pending",
     "Passed",
     "Failed",
+}
+
+VALID_COVERAGE_STATUSES = {
+    "Covered",
+    "Partially Covered",
+    "Gap",
 }
 
 
@@ -376,6 +401,97 @@ def validate_uat_test_cases() -> list[str]:
 
     return errors
 
+def validate_traceability_matrix() -> list[str]:
+    file_name = "Requirements traceability CSV"
+
+    errors, column_names, rows = validate_csv_structure(
+        file_name=file_name,
+        file_path=TRACEABILITY_FILE_PATH,
+        required_columns=TRACEABILITY_REQUIRED_COLUMNS,
+        expected_row_count=23,
+        unique_columns=["trace_id"]
+    )
+
+    structurally_valid = (
+        column_names
+        and TRACEABILITY_REQUIRED_COLUMNS.issubset(
+            set(column_names)
+        )
+    )
+
+    detected_trace_ids: set[str] = set()
+
+    if structurally_valid:
+        for row_number, row in enumerate(rows, start=2):
+            trace_id = row["trace_id"].strip()
+            business_objective = row[
+                "business_objective"
+            ].strip()
+
+            detected_trace_ids.add(trace_id)
+
+            if not re.fullmatch(
+                pattern=r"RT-[0-9]{3}",
+                string=trace_id,
+            ):
+                errors.append(
+                    f"{file_name} row {row_number}: "
+                    f"Invalid trace_id format '{trace_id}'."
+                )
+
+            if not re.fullmatch(
+                pattern=r"BO-[0-9]{3}",
+                string=business_objective,
+            ):
+                errors.append(
+                    f"{file_name} row {row_number}: "
+                    f"invalid business_objective format "
+                    f"'{business_objective}'."
+                )
+
+            validate_allowed_value(
+                errors=errors,
+                file_name=file_name,
+                row_number=row_number,
+                column_name="coverage_status",
+                value=row["coverage_status"].strip(),
+                allowed_values=VALID_COVERAGE_STATUSES,
+            )
+
+        expected_trace_ids = {
+            f"RT-{trace_number:03d}"
+            for trace_number in range(1,24)
+        }
+
+        missing_trace_ids = (
+            expected_trace_ids - detected_trace_ids
+        )
+
+        unexpected_trace_ids = (
+            detected_trace_ids - expected_trace_ids
+        )
+
+        if missing_trace_ids:
+            errors.append(
+                f"{file_name}: missing trace IDs: "
+                f"{sorted(missing_trace_ids)}"
+            )
+
+        if unexpected_trace_ids:
+            errors.append(
+                f"{file_name}: unexpected trace IDs: "
+                f"{sorted(unexpected_trace_ids)}"
+            )
+
+    print(f"\nFile: {TRACEABILITY_FILE_PATH}")
+    print(f"Columns detected: {len(column_names)}")
+    print(f"Data rows detected: {len(rows)}")
+
+    return errors
+
+
+
+
 
 def main() -> int:
     validation_functions: list[
@@ -383,6 +499,7 @@ def main() -> int:
     ] = [
         validate_risk_controls,
         validate_uat_test_cases,
+        validate_traceability_matrix,
     ]
 
     all_errors: list[str] = []

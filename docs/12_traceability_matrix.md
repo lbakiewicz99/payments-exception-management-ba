@@ -66,10 +66,10 @@ This model supports:
 | RT-004   | BO-002             | BRQ-002              | FR-017, CR-006              | US-011                         | BR-040, BR-041                     | R-003, C-003               | TC-007                         |
 | RT-005   | BO-003             | BRQ_003              | FR-004, DR-008              | US-002                         | BR-004, BR-075 to BR-078           | R-014, C-014               | TC-003                         |
 | RT-006   | BO-003             | BRQ-003              | FR-005, DR-009              | US-004                         | BR-007 to BR-016                   | R-012, R-013, C-012, C-013 | TC-004, TC-005, TC-027         |
-| RT-007   | BO-003             | BRQ-003              | FR-007, DR-010              | US-006                         | BR-017 to BR-024                   | R-004, C-004               | TC-008, TC-028                 |
+| RT-007   | BO-003             | BRQ-003              | FR-007, DR-010              | US-013                         | BR-017 to BR-024                   | R-004, C-004               | TC-008, TC-028                 |
 | RT-008   | BO-004             | BRQ-004              | FR-008, DR-013              | US-006                         | BR-025, BR-026, BR-031, BR-032     | R-007, C-007               | TC-010                         |
 | RT-009   | BO-004             | BRQ-004              | FR-009, DR-014              | US-007                         | BR-027 to BR-030                   | R-007, C-007               | TC-011                         |  
-| RT-010   | BO-004             | BRQ-004              | FR-010, DR-015              | US-008                         | BR-033 to BR-038                   | R-008, C-008               | TC-012, TC-013                 | 
+| RT-010   | BO-004             | BRQ-004              | FR-010, DR-015              | US-014                         | BR-033 to BR-038                   | R-008, C-008               | TC-012, TC-013                 | 
 | RT-011   | BO-005             | BRQ-005              | FR-012, DR-016              | US-008                         | BR-045 to BR-051                   | R-009, R-016, C-009, C-016 | TC-014                         |
 | RT-012   | BO-005             | BRQ-005              | FR-018, CR-003 to CR-005    | US-008, US-012                 | BR-045 to BR-050                   | R-005 to R-009             | TC-014, TC-023                 |
 | RT-013   | BO-006             | BRQ-006              | FR-011, DR-017              | US-005                         | BR-043, BR-054, BR-062             | R-010, C-010               | TC-015, TC-016                 |
@@ -99,7 +99,9 @@ This model supports:
 | US-009        |  Close case with closure reason   | FR-013, DR-018, DR-019, CR-001, CR-002 | BR-052 to BR-058               | C-010, C-011               | TC-016, TC-017, TC-018 |
 | US-010        | Filter exception queue            | FR-015, RR-001 to RR-004               | BR-066 to BR-069               | C-007, C-008               | TC-020                 |
 | US-011        | View unassigned cases             | FR-017, CR-006                         | BR-040, BR-041                 | C-003                      | TC-007                 |
-| US-012        | View management reporting summary | RR-001 to RR-009                       | BR-066 to BR-074               | C-017, C-018               | TC-021 to TC-026       | 
+| US-012        | View management reporting summary | RR-001 to RR-009                       | BR-066 to BR-074               | C-017, C-018               | TC-021 to TC-026       |
+| US-013        | Update case priority              | FR-007, DR-010, CR-003, CR-008         | BR-017 to BR-024               | C-004, C-005               | TC-008, TC-028         |
+| US-014        | Identify aged payment exception   | FR-010, DR-015, RR-003, CR-005         | BR-033 to BR-038               | C-008                      | TC-012, TC-013, TC-022 |
 
 ## 6. Control traceability
 

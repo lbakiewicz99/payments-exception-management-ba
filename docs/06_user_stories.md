@@ -255,3 +255,94 @@ And I should be able to review breakdowns by exception type and payment channel
 * RR-005
 * RR-006
 * RR-009
+
+## US-013: Update case priority
+
+**As a** Payments Operations Analyst or Team Lead
+**I want to** assign and update the operational priority of a payment exception case
+**So that** cases can be investigated and escalated to their business risk and urgency.
+
+### Acceptance criteria
+
+```gherkin
+Scenario: Assign a valid priority
+    Given an active payment exception case exists
+    When the user selects Low, Medium, High, or Critical priority
+    And saves the case
+    Then the selected priority is stored
+    And the priority is visible in the exception queue
+
+Scenario: Record a priority change
+    Given an active payment exception case has an existing priority
+    When authorized user changes the priority
+    Then the previous and new priority values are recorded
+    And the user timestamp are retained in case history
+
+Scenario: Apply priority to a high-value case
+    Given a payment exception meets the high-value threshold
+    When the case priority is assigned
+    Then the priority must be High or Critical
+
+Scenario: Apply priority to a duplicate-risk case
+    Given a case is classified as Duplicate Payment Risk
+    When the case priority is assigned
+    Then the priority must be High or Critical
+
+Scenario: Reject an invalid priority
+    Given an active payment exception case exists
+    When a user attempts to store a priority outside the controlled list
+    Then the invalid value is rejected
+```
+
+### Related requirements
+
+* FR-007
+* DR-010
+* CR-003
+* CR-008
+* DQ-006
+* BR-017 to BR-024
+
+## US-014: Identify aged payment exceptions
+
+**As a** Payments Operations Team Lead
+**I want to** identify cases that have remained open beyond the defined aging threshold
+**So that** long-running payment exceptions can be reviewed and escalated.
+
+### Acceptance criteria
+
+```gherkin
+Scenario: Calculate days open
+    Given an open payment exception case exists
+    When the aging calculation is performed
+    Then the number of business days since case creation is calculated
+
+Scenario: Assign an aging bucket
+    Given an open payment exception case has a calculated number of days open
+    When the aging calculation is performed
+    Then the case is assigned to the correct aging bucket
+
+Scenario: Flag an aged case
+    Given an open payment exception case has remained open for more than five business days
+    When the aging calculation is performed
+    Then the aged exception flag is set to Yes
+
+Scenario: Stop aging after closure
+    Given a payment exception case is Closed
+    When case age is calculated
+    Then the final case age is based on the closed date
+    And the case is excluded from the active aged exception population
+
+Scenario: Escalate an aged high-risk case
+    Given an aged case has High or Critical priority
+    When the daily control review is performed
+    Then the case is included in the escalation review population
+```
+
+### Related requirements
+
+* FR-010
+* DR-015
+* RR-003
+* CR-005
+* BR-033 to BR-038
